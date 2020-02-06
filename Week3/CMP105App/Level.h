@@ -27,6 +27,9 @@ private:
 	//Moving circle vars
 	sf::CircleShape circle;
 
+	sf::Font font;
+	sf::Text velocity_txt;
+
 	// Circle speeds
 	float speed_x;
 	float speed_y;

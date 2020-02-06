@@ -15,8 +15,19 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	circle.setOutlineColor(sf::Color::Red);
 	circle.setOutlineThickness(2.f);
 
-	speed_x = 100.f;
-	speed_y = 500.f;
+	speed_x = 10.f;
+	speed_y = 10.f;
+
+	//Text
+	if (!font.loadFromFile("font/arial.ttf"))
+	{
+		std::cout << "Error loading font \n";
+	}
+	velocity_txt.setFont(font);
+	velocity_txt.setString("Velocity (x,y)");
+	velocity_txt.setCharacterSize(24);
+	velocity_txt.setFillColor(sf::Color::Red);
+	velocity_txt.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
 }
 
@@ -28,7 +39,27 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
+	if (input->isKeyDown(sf::Keyboard::Up))
+	{
+		speed_y -= 10.1f;
+		input->setKeyUp(sf::Keyboard::Up);
+	}
+	else if (input->isKeyDown(sf::Keyboard::Down))
+	{
+		speed_y += 10.1f;
+		input->setKeyUp(sf::Keyboard::Down);
+	}
 
+	if (input->isKeyDown(sf::Keyboard::Left))
+	{
+		speed_x -= 10.1f;
+		input->setKeyUp(sf::Keyboard::Left);
+	}
+	else if (input->isKeyDown(sf::Keyboard::Right))
+	{
+		speed_x += 10.1f;
+		input->setKeyUp(sf::Keyboard::Right);
+	}
 }
 
 // Update game objects
@@ -78,6 +109,9 @@ void Level::update(float dt)
 	// Update/move circle
 	circle.move(dt_speed_x, dt_speed_y); //Speed with delta
 
+	//Update mouse_position_txt
+	velocity_txt.setString("Speed (" + std::to_string(speed_x) + "," + std::to_string(speed_y) + ")");
+
 }
 
 // Render level
@@ -86,6 +120,7 @@ void Level::render()
 	beginDraw();
 
 	window->draw(circle);
+	window->draw(velocity_txt);
 
 	endDraw();
 }
