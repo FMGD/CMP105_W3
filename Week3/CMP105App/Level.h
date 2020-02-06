@@ -26,5 +26,10 @@ private:
 
 	//Moving circle vars
 	sf::CircleShape circle;
-	float speed;
+
+	// Circle speeds
+	float speed_x;
+	float speed_y;
+	float dt_speed_x, dt_speed_y;
+
 };
