@@ -109,7 +109,7 @@ void Level::update(float dt)
 	// Update/move circle
 	circle.move(dt_speed_x, dt_speed_y); //Speed with delta
 
-	//Update mouse_position_txt
+	//Update speed_txt
 	velocity_txt.setString("Speed (" + std::to_string(speed_x) + "," + std::to_string(speed_y) + ")");
 
 }
